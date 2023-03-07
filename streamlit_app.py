@@ -21,8 +21,6 @@ def get_fruityvice_data(this_fruit_choice):
   fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
   return fruityvice_normalized
 #streamlit.dataframe(fruityvice_normalized)
-  
-  
 
 # Display the table on the page.
 fruits_to_show = my_fruit_list.loc[fruits_selected]
@@ -57,6 +55,7 @@ def get_fruit_load_list():
 if streamlit.button('Get Fruit Load List'):
   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
   my_data_row = get_fruit_load_list()
+  my_cnx.close()
   streamlit.dataframe(my_data_row)
 
 def insert_row_snowflake(new_fruit):
